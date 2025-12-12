@@ -10,6 +10,11 @@ langchain集成了B站官方接口，可以爬取视频信息，比如字幕，�
 到该网站爬取字幕是为了使用langchain保存数据到向量库，并且将数据库持久化保存在电脑磁盘中，
 持久化保存的目的是为了方便后期随时调用向量数据库加载这部分数据，而不用再创建向量数据库.
 也可以爬取油管网站的视频字幕，安装方法：pip install youtube-transcript-api pytube
+
+Langchain integrates the official interface of Bilibili and can retrieve video information, such as subtitles, descriptions, etc.
+To retrieve subtitles from this website, the purpose is to use Langchain to save the data to a vector database and persistently store the database on the computer's hard drive.
+The purpose of persistent storage is to facilitate the later retrieval of the vector database to load this part of the data without having to create a new vector database.
+Subtitles of videos from YouTube can also be retrieved. Installation method: pip install youtube-transcript-api pytube
 """
 import os
 
@@ -32,9 +37,9 @@ l_bilibili_vido = ["https://www.bilibili.com/video/BV1chBeYNEQR?t=9.3"]
 # 4.爬取视频链接的数据并加载为document对象 Crawl the data of the video link and load it as a document object
 document_obj = BiliBiliLoader(
     video_urls=l_bilibili_vido,
-    sessdata="c3cd115c%2C1781059133%2Cab659%2Ac2CjDl35nH4gsrMpnkNHQTAWvsr4n_ifUWAo8ZnJ1Em_kVraYfR34CECyKozYhNGyQfK4SVldQOWhIaXc2bFg1TEhjZ2hWNDF4Snk1LUU4NjNXQ3pvV2FLN1h5cGZ1ZVRQYnQwdkpXVGF3ektTVGNTWElCanJRV0lVT3hMRVF5YTlqeFM2NWt2SmZ3IIEC",
-    bili_jct="b31075887c9375172450e3711312fe3b",
-    buvid3="6C009ED2-69D6-DC59-D098-831AEF04AA6418147infoc"
+    sessdata="c3cd115c%2C1781059133%2Cab659%2Ac2CjDl35nH4gs....",
+    bili_jct="b31075887.....",
+    buvid3="6C009ED2-69D6-DC59-D098-831...."
 ).load()
 
 # 5.使用文档分割器进行分割 Split using a document splitter
@@ -126,3 +131,4 @@ Result as the follow：
 这句话无厘头又重复，显得特别滑稽。  
 其他如“抱团有点快啊”也有趣，但不如这句突出。
 """
+

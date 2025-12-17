@@ -35,8 +35,8 @@ In Langchain, when using SQLAlchemy for connection,
 SQLAlchemy uses the function `create_engine` to generate a database engine object from the URL.
 """
 
-username = api_keys.l_username
-pw_mysql = api_keys.lpw_mysql
+username = api_keys.username
+pw_mysql = api_keys.pw_mysql
 port = '3306'
 hostname = "127.0.0.1"
 db_name = "test_db1"
@@ -181,4 +181,5 @@ if __name__ == "__main__":
     # +----+-------+--------+-----+-----------------------+-----------------------------------+
     # Result as the follow:
     # Final answer： Answer: There are **5** pieces of data in the users_langchain table
+
 

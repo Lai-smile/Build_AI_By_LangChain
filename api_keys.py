@@ -14,3 +14,7 @@ ty_api_key = "your qwen api key"
 
 # openrouter
 openrouter_api_key = "your openrouter api key"
+
+# mysql, Make sure that your MySQL account only has the permission to query.
+username = "local_user"
+pw_mysql = "your password"

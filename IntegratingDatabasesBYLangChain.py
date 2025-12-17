@@ -137,6 +137,7 @@ final_chain = (
 
             # 生成SQL（使用清理后的输入） Generate SQL (using the cleaned input)
             query=lambda x: test_query_chain.invoke({
+                # The underlying hardcoding of create_sql_query_chain requires that the Prompt must include the input variable as well as the question(regardless of whether you use it or not)
                 "input": x["question"],
                 "question": x["question"],
             })
@@ -180,3 +181,4 @@ if __name__ == "__main__":
     # +----+-------+--------+-----+-----------------------+-----------------------------------+
     # Result as the follow:
     # Final answer： Answer: There are **5** pieces of data in the users_langchain table
+

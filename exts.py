@@ -75,3 +75,37 @@ def log_func(root_path):
 
 # 创建日志对象
 logger = log_func(r"D:\Project\AIProject\LangchainStudy")
+
+def safe_decode(text, fallback_encoding="utf-8"):
+    """
+    安全解码文本，处理各种编码异常 Safely decode text and handle various encoding exceptions
+    :param text: 输入文本（可能是str或bytes） Input text (maybe str or bytes)
+    :param fallback_encoding: 兜底编码格式
+    :return: 处理后的str文本 The processed string text
+    """
+    # 如果是bytes类型，先尝试解码 If it is of the bytes type, first try to decode it.
+    if isinstance(text, bytes):
+        for encoding in [fallback_encoding, "gbk", "gb2312", "latin-1"]:
+            try:
+                return text.decode(encoding)
+            except UnicodeDecodeError:
+                continue
+        # 所有编码都失败时，忽略错误字符 When all encodings fail, ignore the error characters.
+        return text.decode(fallback_encoding, errors="replace")
+
+    # 如果是str类型，处理无法编码的字符（如特殊符号） If it is of type str, handle unencodable characters (such as special symbols)
+    elif isinstance(text, str):
+        # 去除无法编码的控制字符，或替换为安全字符 Remove unencodable control characters or replace them with safe characters
+        cleaned_text = unicodedata.normalize("NFKC", text)
+        # 尝试用当前终端编码输出，失败则用utf-8 Try to output using the current terminal encoding; if it fails, use utf-8.
+        terminal_encoding = sys.stdout.encoding or fallback_encoding
+        try:
+            cleaned_text.encode(terminal_encoding, errors="strict")
+            return cleaned_text
+        except UnicodeEncodeError:
+            # 替换无法编码的字符 Replace unencodable characters
+            return cleaned_text.encode(terminal_encoding, errors="replace").decode(terminal_encoding)
+
+    # 其他类型转为字符串后处理 Processing after converting other types to strings
+    else:
+        return safe_decode(str(text), fallback_encoding)
